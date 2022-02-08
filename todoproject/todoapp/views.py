@@ -1,9 +1,18 @@
 from django.shortcuts import render
 from .models import TodoListItem
 from django.http import HttpResponseRedirect
+from todoapp.models import TodoListItem
 
 def todoappView(request):
     return render(request, 'todolist.html')
+
+def todoTask(request):
+    if request.method == 'POST':
+        title = request.POST['title']
+        desc = request.POST['desc']
+        print(title, desc)
+        ins = TodoListItem(todoTitle=title, todoDesc=desc)
+        ins.save()
 
 def todoTable(request):
     return render(request, 'todotable.html')
